@@ -56,7 +56,6 @@ jobs:
   reg-suit:
     docker:
       - image: regviz/node-xcb
-    working_directory: ~/repo
     steps:
       - run-reg-suit
 
