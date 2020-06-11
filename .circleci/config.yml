@@ -15,7 +15,7 @@ commands:
       - save_cache:
           paths:
             - node_modules
-          key: dependencies-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          key: dependencies-test-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       # run tests!
       - run: yarn audit --groups dependencies
       - run: yarn lint
