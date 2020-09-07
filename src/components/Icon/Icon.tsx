@@ -308,7 +308,7 @@ export interface IconProps {
   size?: number
 }
 
-export interface Props extends IconProps {
+export interface Props extends IconProps, React.SVGAttributes<SVGAElement> {
   name: keyof typeof iconMap
   className?: string
 }
@@ -616,7 +616,8 @@ export const iconMap = {
   'fa-wrench': FaWrench,
   'fa-yen-sign': FaYenSign,
 }
-export const Icon: React.FC<Props> = ({ name, className = '', ...props }) => {
+
+export const Icon: React.FC<Props> = ({ name, className = '', role = 'img', ...props }) => {
   const SvgIcon = iconMap[name]
-  return <SvgIcon className={className} {...props} />
+  return <SvgIcon className={className} role={role} {...props} />
 }

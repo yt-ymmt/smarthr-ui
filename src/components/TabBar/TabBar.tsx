@@ -26,15 +26,15 @@ const Wrapper = styled.div<{ themes: Theme }>`
 
     return css`
       display: flex;
-      background-color: #fff;
 
       &.bordered {
         position: relative;
 
         :after {
           position: absolute;
+          left: 0;
+          right: 0;
           bottom: 0px;
-          width: 100%;
           border-bottom: ${border.default};
           content: '';
         }

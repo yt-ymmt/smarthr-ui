@@ -14,9 +14,8 @@ exports[`TabBar should be match snapshot 1`] = `
               "lineStyle": "solid",
               "lineWidth": "1px",
               "radius": Object {
-                "l": "8px",
                 "m": "6px",
-                "s": "3px",
+                "s": "4px",
               },
             },
           },
@@ -72,7 +71,7 @@ exports[`TabBar should be match snapshot 1`] = `
       }
     >
       <div
-        className="sc-AxjAm cdVSsP  bordered"
+        className="sc-AxjAm gCFdwB  bordered"
         role="tablist"
       >
         <Component
@@ -93,9 +92,8 @@ exports[`TabBar should be match snapshot 1`] = `
                     "lineStyle": "solid",
                     "lineWidth": "1px",
                     "radius": Object {
-                      "l": "8px",
                       "m": "6px",
-                      "s": "3px",
+                      "s": "4px",
                     },
                   },
                 },
@@ -152,7 +150,7 @@ exports[`TabBar should be match snapshot 1`] = `
           >
             <button
               aria-selected={false}
-              className="sc-AxirZ gdaUxL  "
+              className="sc-AxirZ iiyULo  "
               disabled={false}
               onClick={[Function]}
               role="tab"
@@ -180,9 +178,8 @@ exports[`TabBar should be match snapshot 1`] = `
                     "lineStyle": "solid",
                     "lineWidth": "1px",
                     "radius": Object {
-                      "l": "8px",
                       "m": "6px",
-                      "s": "3px",
+                      "s": "4px",
                     },
                   },
                 },
@@ -239,7 +236,7 @@ exports[`TabBar should be match snapshot 1`] = `
           >
             <button
               aria-selected={true}
-              className="sc-AxirZ gdaUxL  selected"
+              className="sc-AxirZ iiyULo  selected"
               disabled={false}
               onClick={[Function]}
               role="tab"
@@ -267,9 +264,8 @@ exports[`TabBar should be match snapshot 1`] = `
                     "lineStyle": "solid",
                     "lineWidth": "1px",
                     "radius": Object {
-                      "l": "8px",
                       "m": "6px",
-                      "s": "3px",
+                      "s": "4px",
                     },
                   },
                 },
@@ -326,7 +322,7 @@ exports[`TabBar should be match snapshot 1`] = `
           >
             <button
               aria-selected={false}
-              className="sc-AxirZ gdaUxL  "
+              className="sc-AxirZ iiyULo  "
               disabled={true}
               onClick={[Function]}
               role="tab"

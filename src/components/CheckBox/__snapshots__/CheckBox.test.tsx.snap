@@ -15,9 +15,8 @@ exports[`CheckBox should be match snapshot 1`] = `
             "lineStyle": "solid",
             "lineWidth": "1px",
             "radius": Object {
-              "l": "8px",
               "m": "6px",
-              "s": "3px",
+              "s": "4px",
             },
           },
         },
@@ -87,9 +86,8 @@ exports[`CheckBox should be match snapshot 1`] = `
                 "lineStyle": "solid",
                 "lineWidth": "1px",
                 "radius": Object {
-                  "l": "8px",
                   "m": "6px",
-                  "s": "3px",
+                  "s": "4px",
                 },
               },
             },
@@ -163,9 +161,8 @@ exports[`CheckBox should be match snapshot 1`] = `
                 "lineStyle": "solid",
                 "lineWidth": "1px",
                 "radius": Object {
-                  "l": "8px",
                   "m": "6px",
-                  "s": "3px",
+                  "s": "4px",
                 },
               },
             },
@@ -233,9 +230,8 @@ exports[`CheckBox should be match snapshot 1`] = `
                 "lineStyle": "solid",
                 "lineWidth": "1px",
                 "radius": Object {
-                  "l": "8px",
                   "m": "6px",
-                  "s": "3px",
+                  "s": "4px",
                 },
               },
             },
@@ -301,6 +297,7 @@ exports[`CheckBox should be match snapshot 1`] = `
             <FaCheck
               className=""
               color="#fff"
+              role="img"
               size={10}
             >
               <IconBase
@@ -311,12 +308,14 @@ exports[`CheckBox should be match snapshot 1`] = `
                 }
                 className=""
                 color="#fff"
+                role="img"
                 size={10}
               >
                 <svg
                   color="#fff"
                   fill="currentColor"
                   height={10}
+                  role="img"
                   size={10}
                   stroke="currentColor"
                   strokeWidth="0"
