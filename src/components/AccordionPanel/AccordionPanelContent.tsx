@@ -10,13 +10,15 @@ type Props = {
   className?: string
 }
 
+const duration = 200
+
 export const AccordionPanelContent: FC<Props> = ({ children, className = '' }) => {
   const { name } = useContext(AccordionPanelItemContext)
   const { expandedItems } = useContext(AccordionPanelContext)
   const isInclude = getIsInclude(expandedItems, name)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const togglePanel = useCallback(
+  const recalculateHeight = useCallback(
     (node: HTMLElement) => {
       const wrapperHeight = wrapperRef.current ? wrapperRef.current.clientHeight : 0
       node.style.height = `${wrapperHeight}px`
@@ -26,32 +28,30 @@ export const AccordionPanelContent: FC<Props> = ({ children, className = '' }) =
 
   const handleEntered = (node: HTMLElement) => {
     node.style.height = 'auto'
+    node.style.visibility = 'visible'
   }
 
   const handleExited = (node: HTMLElement) => {
     node.style.height = '0px'
+    node.style.visibility = 'hidden'
   }
 
   return (
     <Transition
       in={isInclude}
-      onEntering={togglePanel}
+      onEntering={recalculateHeight}
       onEntered={handleEntered}
-      onExit={togglePanel}
-      onExiting={togglePanel}
+      onExit={recalculateHeight}
+      onExiting={recalculateHeight}
       onExited={handleExited}
-      timeout={{
-        enter: 200,
-        exit: 0,
-      }}
+      timeout={duration}
     >
       {(status) => (
         <CollapseContainer
           id={`${name}-content`}
-          role="region"
           className={`${status} ${className}`}
           aria-labelledby={`${name}-trigger`}
-          hidden={!isInclude}
+          aria-hidden={!isInclude}
         >
           <div ref={wrapperRef}>{children}</div>
         </CollapseContainer>
@@ -60,12 +60,14 @@ export const AccordionPanelContent: FC<Props> = ({ children, className = '' }) =
   )
 }
 
-const CollapseContainer = styled.div`
+const CollapseContainer = styled.section`
   height: 0;
   overflow: hidden;
-  transition: height 0.2s ease;
+  transition: height ${duration}ms ease;
+  visibility: hidden;
 
   &.entered {
     height: auto;
+    visibility: visible;
   }
 `

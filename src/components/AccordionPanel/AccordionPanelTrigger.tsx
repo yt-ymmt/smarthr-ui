@@ -3,14 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Theme, useTheme } from '../../hooks/useTheme'
 import { getIsInclude, mapToKeyArray } from '../../libs/map'
-import {
-  focusFirstSibling,
-  focusLastSibling,
-  focusNextSibling,
-  focusPreviousSibling,
-  getNewExpandedItems,
-  keycodes,
-} from './accordionPanelHelper'
+import { getNewExpandedItems } from './accordionPanelHelper'
 import { AccordionPanelContext } from './AccordionPanel'
 import { AccordionPanelItemContext } from './AccordionPanelItem'
 
@@ -38,7 +31,6 @@ export const AccordionPanelTrigger: FC<Props> = ({
     onClickTrigger,
     onClickProps,
     expandableMultiply,
-    parentRef,
   } = useContext(AccordionPanelContext)
 
   const isExpanded = getIsInclude(expandedItems, name)
@@ -60,40 +52,6 @@ export const AccordionPanelTrigger: FC<Props> = ({
     }
   }, [onClickTrigger, name, isExpanded, onClickProps, expandedItems, expandableMultiply])
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLButtonElement>): void => {
-    if (!parentRef?.current) {
-      return
-    }
-
-    const keyCode = event.which
-    const item = event.target as HTMLElement
-
-    switch (keyCode) {
-      case keycodes.HOME: {
-        event.preventDefault()
-        focusFirstSibling(parentRef.current)
-        break
-      }
-      case keycodes.END: {
-        event.preventDefault()
-        focusLastSibling(parentRef.current)
-        break
-      }
-      case keycodes.LEFT:
-      case keycodes.UP: {
-        event.preventDefault()
-        focusPreviousSibling(item, parentRef.current)
-        break
-      }
-      case keycodes.RIGHT:
-      case keycodes.DOWN: {
-        event.preventDefault()
-        focusNextSibling(item, parentRef.current)
-        break
-      }
-    }
-  }
-
   const caretIcon = <Icon className={iconClassNames} name="fa-caret-down" themes={theme} />
 
   return (
@@ -105,7 +63,6 @@ export const AccordionPanelTrigger: FC<Props> = ({
         aria-controls={`${name}-content`}
         themes={theme}
         onClick={handleClick}
-        onKeyDown={handleKeyPress}
         data-component="AccordionHeaderButton"
       >
         {displayIcon && iconPosition === 'left' && caretIcon}

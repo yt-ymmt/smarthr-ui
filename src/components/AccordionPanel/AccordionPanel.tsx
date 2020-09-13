@@ -1,7 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { flatArrayToMap } from '../../libs/map'
-import { getNewExpandedItems } from './accordionPanelHelper'
+import {
+  focusFirstSibling,
+  focusLastSibling,
+  focusNextSibling,
+  focusPreviousSibling,
+  getNewExpandedItems,
+  keycodes,
+} from './accordionPanelHelper'
 
 type Props = {
   children: React.ReactNode
@@ -48,6 +55,40 @@ export const AccordionPanel: React.FC<Props> = ({
     [expandableMultiply, expandedItems],
   )
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (!parentRef?.current) {
+      return
+    }
+
+    const keyCode = event.keyCode
+    const item = event.target as HTMLElement
+
+    switch (keyCode) {
+      case keycodes.HOME: {
+        event.preventDefault()
+        focusFirstSibling(parentRef.current)
+        break
+      }
+      case keycodes.END: {
+        event.preventDefault()
+        focusLastSibling(parentRef.current)
+        break
+      }
+      case keycodes.LEFT:
+      case keycodes.UP: {
+        event.preventDefault()
+        focusPreviousSibling(item, parentRef.current)
+        break
+      }
+      case keycodes.RIGHT:
+      case keycodes.DOWN: {
+        event.preventDefault()
+        focusNextSibling(item, parentRef.current)
+        break
+      }
+    }
+  }
+
   useEffect(() => {
     if (defaultExpanded.length > 0) setExpanded(flatArrayToMap(defaultExpanded))
   }, [defaultExpanded])
@@ -64,7 +105,7 @@ export const AccordionPanel: React.FC<Props> = ({
         parentRef,
       }}
     >
-      <div className={className} ref={parentRef}>
+      <div className={className} ref={parentRef} onKeyDown={handleKeyPress}>
         {children}
       </div>
     </AccordionPanelContext.Provider>
