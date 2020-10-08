@@ -51,7 +51,7 @@ export const Dropdown: FC<Props> = ({ children }) => {
     const onClickBody = (e: any) => {
       // ignore events from events within DropdownTrigger and DropdownContent
       if (
-        e.target === triggerElementRef.current ||
+        hasParentElement(e.target, triggerElementRef.current) ||
         hasParentElement(e.target, portalElementRef.current)
       ) {
         return
