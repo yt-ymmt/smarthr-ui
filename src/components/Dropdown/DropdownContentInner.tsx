@@ -73,7 +73,7 @@ export const DropdownContentInner: FC<Props> = ({
         if (firstTabbale) {
           firstTabbale.focus()
         }
-      }, 100)
+      }, 30)
     }
   }, [isActive])
 
