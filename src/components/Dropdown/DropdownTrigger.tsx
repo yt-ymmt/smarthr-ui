@@ -22,7 +22,9 @@ export const DropdownTrigger: React.FC<Props> = ({ children, className = '' }) =
     if (trigger && trigger instanceof HTMLElement) {
       trigger.setAttribute('aria-expanded', String(active))
       trigger.setAttribute('aria-haspopup', 'dialog')
-      trigger.setAttribute('aria-controls', contentWrapperId)
+      if (active) {
+        trigger.setAttribute('aria-controls', contentWrapperId)
+      }
     }
   }, [triggerElementRef, active, contentWrapperId])
 
