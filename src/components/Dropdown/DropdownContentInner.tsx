@@ -1,10 +1,11 @@
-import React, { FC, createContext, useEffect, useRef, useState } from 'react'
+import React, { FC, createContext, useLayoutEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Theme, useTheme } from '../../hooks/useTheme'
 
-import { ContentBoxStyle, Rect, getContentBoxStyle } from './dropdownHelper'
+import { ContentBoxStyle, Rect, getContentBoxStyle, getFirstTabbable } from './dropdownHelper'
 import { DropdownCloser } from './DropdownCloser'
+import { useKeyboardNavigation } from './useKeyboardNavigation'
 
 type Props = {
   triggerRect: Rect
@@ -30,7 +31,6 @@ export const DropdownContentInner: FC<Props> = ({
   controllable,
 }) => {
   const theme = useTheme()
-  const [isMounted, setIsMounted] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [contentBox, setContentBox] = useState<ContentBoxStyle>({
     top: '0',
@@ -38,12 +38,9 @@ export const DropdownContentInner: FC<Props> = ({
     maxHeight: '',
   })
   const wrapperRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
-  useEffect(() => {
-    if (isMounted && wrapperRef.current) {
+  useLayoutEffect(() => {
+    if (wrapperRef.current) {
       setContentBox(
         getContentBoxStyle(
           triggerRect,
@@ -63,7 +60,22 @@ export const DropdownContentInner: FC<Props> = ({
       )
       setIsActive(true)
     }
-  }, [isMounted, triggerRect])
+  }, [triggerRect])
+
+  useLayoutEffect(() => {
+    if (isActive) {
+      // when the dropdwon content becomes active, focus a first tabbable element in it
+      setTimeout(() => {
+        // delay for waiting to change the inner contents to visible
+        const firstTabbale = getFirstTabbable(wrapperRef)
+        if (firstTabbale) {
+          firstTabbale.focus()
+        }
+      }, 100)
+    }
+  }, [isActive])
+
+  useKeyboardNavigation(wrapperRef)
 
   return (
     <Wrapper
