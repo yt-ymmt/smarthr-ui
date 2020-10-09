@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { DropdownContext } from './Dropdown'
@@ -9,7 +9,22 @@ type Props = {
 }
 
 export const DropdownTrigger: React.FC<Props> = ({ children, className = '' }) => {
-  const { active, onClickTrigger, triggerElementRef } = useContext(DropdownContext)
+  const { active, onClickTrigger, contentWrapperId, triggerElementRef } = useContext(
+    DropdownContext,
+  )
+
+  useEffect(() => {
+    if (!triggerElementRef.current) {
+      return
+    }
+    // find trigger element and add ARIA
+    const trigger = triggerElementRef.current.querySelector('input, button, a[href], [tabindex]')
+    if (trigger && trigger instanceof HTMLElement) {
+      trigger.setAttribute('aria-expanded', String(active))
+      trigger.setAttribute('aria-haspopup', 'dialog')
+      trigger.setAttribute('aria-controls', contentWrapperId)
+    }
+  }, [triggerElementRef, active, contentWrapperId])
 
   return (
     <Wrapper

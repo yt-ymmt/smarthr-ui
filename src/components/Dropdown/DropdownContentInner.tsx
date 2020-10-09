@@ -8,6 +8,7 @@ import { DropdownCloser } from './DropdownCloser'
 import { useKeyboardNavigation } from './useKeyboardNavigation'
 
 type Props = {
+  id: string
   triggerRect: Rect
   scrollable: boolean
   children: React.ReactNode
@@ -24,6 +25,7 @@ export const DropdownContentInnerContext = createContext<DropdownContentInnerCon
 })
 
 export const DropdownContentInner: FC<Props> = ({
+  id,
   triggerRect,
   scrollable,
   children,
@@ -79,6 +81,7 @@ export const DropdownContentInner: FC<Props> = ({
 
   return (
     <Wrapper
+      id={id}
       ref={wrapperRef}
       contentBox={contentBox}
       scrollable={scrollable}
