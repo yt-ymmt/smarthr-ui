@@ -29,7 +29,8 @@ const Label = styled.label<{ themes: Theme }>`
     const { palette } = themes
     return css`
       display: flex;
-      align-items: center;
+      // 複数行テキストに対応させるため flex-start にする
+      align-items: flex-start;
       color: ${palette.TEXT_BLACK};
       cursor: pointer;
 
@@ -47,6 +48,15 @@ const Txt = styled.span<{ themes: Theme }>`
     return css`
       margin: 0 0 0 ${size.pxToRem(size.space.XXS)};
       font-size: ${size.pxToRem(size.font.TALL)};
+
+      // checkbox と text の位置がずれるため、line-height 分を調整する疑似要素を作る
+      &::before {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+        margin-top: calc((1 - 1.5) * 0.5em);
+      }
     `
   }}
 `
