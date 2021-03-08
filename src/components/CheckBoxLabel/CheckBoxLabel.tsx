@@ -6,16 +6,24 @@ import { Theme, useTheme } from '../../hooks/useTheme'
 
 type Props = CheckBoxProps & {
   label: string
+  lineHeight?: number
 }
 
-export const CheckBoxLabel: VFC<Props> = ({ label, className = '', ...props }) => {
+export const CheckBoxLabel: VFC<Props> = ({
+  label,
+  lineHeight = 1.5,
+  className = '',
+  ...props
+}) => {
   const theme = useTheme()
 
   return (
     <Wrapper className={className}>
       <Label className={`${props.disabled ? 'disabled' : ''}`} themes={theme}>
         <CheckBox {...props} />
-        <Txt themes={theme}>{label}</Txt>
+        <Txt themes={theme} lineHeight={lineHeight}>
+          {label}
+        </Txt>
       </Label>
     </Wrapper>
   )
@@ -42,8 +50,8 @@ const Label = styled.label<{ themes: Theme }>`
     `
   }}
 `
-const Txt = styled.span<{ themes: Theme }>`
-  ${({ themes }) => {
+const Txt = styled.span<{ themes: Theme; lineHeight: number }>`
+  ${({ themes, lineHeight }) => {
     const { size } = themes
     // checkbox と text の位置がずれるため、line-height 分を調整する疑似要素を作る
     return css`
@@ -55,7 +63,7 @@ const Txt = styled.span<{ themes: Theme }>`
         display: block;
         height: 0;
         width: 0;
-        margin-top: calc((1 - 1.5) * 0.5em);
+        margin-top: calc((1 - ${lineHeight}) * 0.5em);
       }
     `
   }}
