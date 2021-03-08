@@ -89,16 +89,6 @@ storiesOf('CheckBoxLabel', module)
               onChange={onChange}
             />
           </li>
-          <li>
-            <CheckBoxLabel
-              label="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-              name="name10"
-              checked={true}
-              mixed={true}
-              disabled={true}
-              onChange={onChange}
-            />
-          </li>
         </List>
       </li>
     </Group>
